@@ -89,9 +89,7 @@ We most likely will not use this data frame because the movie_budgets dataframe 
 
 # Statistical Communication
 
-The question we wanted to answer was whether producing a big budget film (production budget > \\$100,000,000) or small budget film (production budget < \\$5,000,000) would be better for Computing Vision. Being a new company with little experience in the Movie Indstury and no name sake, going all in on a large budget film is risky. 
-
-We looked at what percentage of small, medium, and large budget films produced a profit and to our surprise small budget films drastcially out perform big budget films. In fact, 47.90% of small budget films were profitable, and only 6.86% of big budget films were profitable. This led us to believe that producing small budget films would be better for Computing Vision.
+The question we wanted to answer was whether producing a big budget film (production budget > \\$50,000,000) or small budget film (production budget < \\$10,000,000) would be better for Computing Vision. Being a new company with little experience in the Movie Indstury and no name sake, going all in on a large budget film is risky. 
 
 To test this, we calculated what the average Gross Margin ratio was for each of the budget sizes by creating a categorical variable to indicate the budget category. After some analysis we ran a independent two sample t test because we did not have all movies created in this test however we wanted to see whether their average gross margins were significantly different. 
 
@@ -113,10 +111,10 @@ Limitations:
     * This means regardless a big budget film will net more profit if proftitable
     
 Results:
-* p-value = 0.32316 > 0.5, > 0.10 thus at both a 90% and 95% confidence level we fail to reject the null hypothesis
-* This indicates that we do not have evidence to support the claim that there is a significant difference between the two averages
+* p-value = 0.00456 < 0.05, < 0.10 thus at both a 90% and 95% confidence level we reject the null hypothesis
+* This indicates that we have evidence to support the claim that the mean gross margin for small budget films is larger than big budget films
 
-Recommendation and Findings: With the information provided, the means from the two samples are not significantly different, meaning based on the given samples the mean gross profit margin for small budget films is comparable to that of a big budget film.  However, for a company such as Computing Vision making their first break into the film industry, beginning with a low budget film that has the potential to turn a high percentage of gross revenue into profits can be a great start. They can then look to scale up and produce bigger budget films as they become a better known name in the industry and get their legs under them in production.
+Recommendation and Findings: With the information provided, the means from the two samples are not significantly different, meaning based on the given samples the mean gross profit margin for small budget films is comparable to that of a big budget film.  However, for a company such as Computing Vision making their first break into the film industry, beginning with a low budget film that has the potential to turn a high percentage of gross revenue into profits can be a great start. They can then look to scale up and produce bigger budget films as they become a better known name in the industry and get their legs under them in production. 
 
 
 # Conclusion
