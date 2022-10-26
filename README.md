@@ -79,7 +79,11 @@ We most likely will not use this data frame because the movie_budgets dataframe 
 
 ## Data Visualizations
 
-[INSERT HERE]
+
+![]("visuals/Mean Gross Margin By Budget Size.jpg")
+![]("visuals/Mean Gross Margin by Month.jpg")
+![]("visuals/Mean Domestic Profit by Genre.jpg")
+
 
 # Statistical Communication
 
@@ -91,9 +95,9 @@ To test this, we calculated what the average Gross Margin ratio was for each of 
 
 The results of this are as follows:
     
-    $H_0:$ There is no difference between small and big budget mean worldwide gross profit margin 
+$H_0:$ There is no difference between small and big budget mean worldwide gross profit margin 
 
-    $H_A:$ The mean Worldwide gross profit margins are different for small and big budget film
+$H_A:$ The mean Worldwide gross profit margins are different for small and big budget film
 
 We want to use statistical analysis rather than simply a graph because we want to conclude that the mean of both of these samples is the same. We did not analyze every movie to exist and as such we wanted to ensure that our information and the claims that we are making have a statistical backing.
 
@@ -125,8 +129,14 @@ Throughout our analysis we found many interesting items related to what makes a 
     * These results are not significantly different based on our testing and as such we would recommend Small Budget
     * Small budget films have a higher probability of profit compared to big budget
         * Thus a better chance to see return on money spent producing a film
-2. Create a movie in the {blank} genre
-    * 
+2. Create a movie in the Family genre
+    * After some analysis we came to the conclusion that a drama movie would be the best movie to produce
+        * Has the highest mean Domestic Profit
+        * Matters because Small Budgets Films perform better domestically
+    * Across the board in all level of analyses Foreign, Domestic, and Total Profit, Family topped the list
+        * Family has the largest Gross Margin by a small amount compared to the Mystery Genre
+        * The results comparing Family and mystery, and Family and TV Movie were not significant 
+        * Then basing our recommendation off the Domestic Profit, we would still recommend a Family movie which has the highest domestic profit
 3. Release your movie in May
     * We see that the summer months, which coincides to when school releases has a spike in average gross margin
         * To be most successful financially, May allows you to capture those months of high revnue
