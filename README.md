@@ -80,9 +80,9 @@ We most likely will not use this data frame because the movie_budgets dataframe 
 ## Data Visualizations
 
 
-![]("visuals/Mean Gross Margin By Budget Size.jpg")
-![]("visuals/Mean Gross Margin by Month.jpg")
-![]("visuals/Mean Domestic Profit by Genre.jpg")
+![Mean Gross Margin by Budget Size]("visuals\Mean Gross Margin by Budget Size.jpg")
+![Mean Gross Margin by Month]("visuals\Mean Gross Margin by Month.jpg")
+![Mean Domestic Profit by Genres]("visuals\Mean Domestic Profit by Genre.jpg")
 
 
 # Statistical Communication
