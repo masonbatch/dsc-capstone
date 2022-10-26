@@ -1,355 +1,135 @@
-# Semester 1 Capstone Project Description
+# Overview
 
-You've made it all the way through the Intensive portion of this course - take a minute to celebrate your awesomeness!
+Our group has been tasked with analyzing historical data from multiple sources regarding information about different movie productions. Our goal is to come up with three recommendations for the company Computing Vision in order to enter into the Movie Industry. Computing vision is a company that has seen the growth of companies creating video content and wanted to get in on the action however, they aren't sure of the best market entry strategy. We are going to define what success looks like in the movie indsutry but more specifically for this firm.
 
-![awesome](https://raw.githubusercontent.com/learn-co-curriculum/dsc-phase-1-project-v2-4/master/awesome.gif)
+# Business Understanding
 
-Now you will put your new skills to use with a large end-of-Semester project!
+The key stakeholder is Computing Vision and their management team
 
-In this project description, we will cover:
+The problem Computing Vision is faced with is that they want a piece of the movie market however don't know how to enter. We need to help them define what success means in this industry. With the data we have we want to explore whether financial metrics or fan (rating) metrics are a better indicator of success. We need to create actionable insights for Computing Vision to be able to decide what their entry strategy is going to be, and how to scale up once they are in the industry.
 
-* [***Project Overview:***](#project-overview) the project goal, audience, and dataset
-* [***Deliverables:***](#deliverables) the specific items you are required to produce for this project
-* [***Grading:***](#grading) how your project will be scored
-* [***Getting Started:***](#getting-started) guidance for how to begin your first project
+Key Business Questions: 
+* What is success?
+    * How much the movie grosses from “The Numbers”
+    * The averaging rating / number of votes from IMDB database
+    * Total Profit and Gross Margin based on budget size
+* What do successful movies look like given our metrics
+* How does genre impact the success of a movie (Based on Financial Metrics?
+* Does director impact the rating and the net profitability?
+* What time of the year (month) is best to release a movie?
 
-## Project Overview
+While we may not touch on all of these, they are all things that could be consider as key questions for the firm. 
 
-For this project, you will use exploratory data analysis and statistical methods to generate insights for a business stakeholder.
+### What is Success?
 
-### Business Problem
+We will define success in two ways. The first being the Gross Margin and the other being Total Profit. The Gross Margin calculations are detailed below. The reason we chose to focus on profitabilty metrics instead of ratings was because this company, computing vision, is trying to break into a well established market they want to ensure that the investment they put in is having a positive return. 
 
-Computing Vision (a made-up company for the purposes of this project) sees all the big companies creating original video content and they want to get in on the fun. They have decided to create a new movie studio, but they don’t have much background in creating movies. You are charged with exploring what types of films are currently doing the best at the box office using different samples of available data. You then will translate those findings into actionable insights that the head of Computing Vision's new movie studio can use to help decide what type of films to create.
+Our recommendations for this company will be based off of the Gross Margin which is portrayed as a percentage. The higher this percentage is the more the company is retaining for every dollar that is invested in the movie and as such is seeing a higher return on their investment. This is not necessarily equivalent to a standard ratio of Gross Margin which would include Net Sales and COGS however, considering the "Gross" columns of our data frame as a proxy for sales, and Production Budget as a proxy for COGS will yield similar results and actionable outcomes
 
-### The Data
+$Gross Margin = \frac{Gross Revenue - Production Budget}{Gross Revenue} x 100$
 
-In the folder `zippedData` are movie datasets from:
+This is an important metric, especially for a company about to enter an industry they have no presence in because it will help show how far their money goes to create profit. The higher this percentage the better the business will be doing because it is an indicator that retains more on each dollar of sales to its costs. This metric also allows us to take a standardized approach to comparing movies and their success. 
 
-* [Box Office Mojo](https://www.boxofficemojo.com/)
-* [IMDB](https://www.imdb.com/)
-* [Rotten Tomatoes](https://www.rottentomatoes.com/)
-* [TheMovieDB](https://www.themoviedb.org/)
-* [The Numbers](https://www.the-numbers.com/)
+We want to investigate what a "Good Movie" i.e. a movie with a high Gross Margin is doing and try to emulate that. Thus we will explore the budget size, what directors are involved in those high margin films, and also what genres see the highest margin
 
-Because it was collected from various locations, the different files have different formats. Some are compressed CSV (comma-separated values) or TSV (tab-separated values) files that can be opened using spreadsheet software or `pd.read_csv`, while the data from IMDB is located in a SQLite database.
+# Data Understanding and Analysis
 
-![movie data erd](https://github.com/learn-co-curriculum/dsc-ai-academy-semester1-capstone/raw/main/movie_data_erd.jpeg)
+The data we chose to focus most of our efforts on came from:
+* IMDB
+* The Numbers
+* TheMovieDB
 
-Note that the above diagram shows ONLY the IMDB data. You will need to look carefully at the features/columns to figure out how the IMDB data relates to the other provided data files.
+Where most of our recommendations came from The Numbers which contains the Gross Revenue and Production Budget numbers as well as IMDB and TheMoviesDB which contained a lot of background information on the movies including ratings and genre.
 
-It is up to you to decide what data from this to use and how to use it. If you are feeling overwhelmed or behind, we recommend you use only the following data files:
+#### IMDB Database information
 
-* `im.db.zip`
-  * Zipped SQLite database (you will need to unzip then query using SQLite)
-  * `movie_basics` and `movie_ratings` tables are most relevant
-* `bom.movie_gross.csv.gz`
-  * Compressed CSV file (you can open without expanding the file using `pd.read_csv`)
+These two database tables share a "movie_id" column, thus we can join on this key and take a look at movie information including name, release year, and genre as well as the average rating with the number of votes. We want to find a good balance of average rating as well as number of ratings since a small number of really high ratings could skew the interpretation of what a "good" movie is.
 
-### Key Points
+#### Rotten Tomatoes Movie Info Dataframe
 
-* **Your analysis should yield three concrete business recommendations.** The ultimate purpose of exploratory analysis is not just to learn about the data, but to help an organization perform better. Explicitly relate your findings to business needs by recommending actions that you think the business (Computing Vision) should take. 
+This dataframe contains general information regarding the movies including rating, director, release date for theaters and DVD as well as the currency, box office, runtime and studio. There is a unique id column which we will not use as an index because it could be useful for combining data frames or doing different lookups
 
-* **Communicating about your work well is extremely important.** Your ability to provide value to an organization is directly reliant on your ability to communicate with them about what you have done and why it is valuable. Create a storyline your audience (the head of Computing Vision's new movie studio) can follow by walking them through the steps of your process, highlighting the most important points, and skipping over the rest.
+We may consider dropping currency, box office, and studio due to there being many missing values
 
-* **Use plenty of relevant visualizations.** Visualizations are invaluable for exploring your data and making your findings accessible to a non-technical audience. Spotlight visuals in your presentation, but only ones that relate directly to your recommendations. Simple visuals are usually best (e.g. bar charts and line graphs), and don't forget to format them well (e.g. labels, titles).
+Most columns are missing values and as such we will have to fill or deal with those missing values accordingly, this dataframe is related to the reviews data frame by the id column which relates to a unique id for each movie
 
-* **Choose appropriate statistical inference techniques.** Hypothesis testing and confidence intervals can provide useful inferences about larger populations based on sample data. Using them helps to see larger insights that may not immediately be available from initial exploratory analysis.
+#### Rotten Tomatoes Review Dataframe
 
-You should have at least *two recommendations* based on your Data Communication work and at least *one recommendation* following your Statistical Communication work.
+The most important information from this dataframe will be the id which cooresponds to the movie that they are reviewing and the rating that they give it. We are missing about more than 10,000 ratings which is a considerable amount to discard, so we could fill these with the average value of the rating for the movie that they are reviewing. In order to make thge rating a useful variable we would have to apply a function to transform it from a string into a float rating value
 
-## Deliverables
+A more advanced approach would be to conduct sentiment analysis and apply weights to the most common keywords found in a review at each score level and develop a heuristic to apply a score to the missing values based on the review that they left discarding all review entries without an actual review.
 
-There are three deliverables for this project:
+This data frame has a relation to the movie_info data frame since bothg come from rotten tomatoes. The id relates to the movie that each critic leaves a review for. 
 
-* A **non-technical presentation** using the Deloitte Powerpoint template to follow good storyboarding and logical structure. More information is available to Deloitte employees [here](https://secure-web.cisco.com/1v6kvlFBED_pKFB1-EiO3J69aSvTLihv98oO6OAryDHDGAa1XLDluQA_RoTguOLSFFUzz-WCJmm5O-04Mt-Dk0IZCqApnb_XDpLUnEmc6vB49BmxGpkvFSOp3KKj-rd8FyZzJ2z73qZr5VYgjox55nPMt1JGaINm5EV6eeTDEzesXOaOEHxZJV4e93UKyG-qYEnMraJwA0ndhvicVcCh_6VnyB0j3k1r_Vcj_Aw0rTJhlUOYT_YB85Tl7IkpvoRnPDPV7BN9E6FM93eqt-7UtvhmPt6fr8O6SLuzaFcHsJpyHEDZBBbsk9IFoU1FauIhP544urgG2sMKGZ6VIdHyx-h7_K-M18z-x7MxPdrTrZbNUZiNRiwG4qymNAkriYkiHj7IudvYgMXrv9c1aonqC46lp7VAOPHmg0Aq7BPs5dR7LlmH4OK_V7OweyrEWNwqrOPFL9QrLNs-KWY_oFuCtEaBTPjNBPIvsxj4cWrozwTWcb02LYTixanfUgIVMxGUv4PAAL461Hnwh-GWWchyFng/https%3A%2F%2Fbecurious.edcast.eu%2Fpathways%2Fai-academy-storyboarding-resources).
-* A **Jupyter Notebook**
-* A **GitHub repository**
+#### The Movie DB Dataframe
 
-### Non-Technical Presentation
+This dataframe is not missing any values. It has information about genre ids and contains a unique id column along with the movie name, how many votes it received, and what the average vote value was. Vote seems to be this specific sites way of ranking the movies. 
 
-The non-technical presentation is a slide deck presenting your analysis to business stakeholders.
+#### The Numbers Movie Budgets Data Frame
 
-* ***Non-technical*** does not mean that you should avoid mentioning the technologies or techniques that you used, it means that you should explain any mentions of these technologies and avoid assuming that your audience is already familiar with them.
-* ***Business stakeholders*** means that the audience for your presentation is Computing Vision, not the class, teacher, or coach. Do not assume that they are already familiar with the specific business problem, but also do not explain to them what Computing Vision is.
+This data frame is also not missing any values, it contains an ID for each movie, the title, production budget, how much the movie grossed domestically and how much it grossed worldwide
 
-The presentation describes the project ***goals, data, methods, and results***. It must include at least ***three visualizations*** which correspond to ***three business recommendations***.
+We will be transforming this data by making the budget and gross column integers as well as adding additional columns for profit and Gross Margin to help us in later analysis
 
-We recommend that you follow this structure, although the slide titles should be specific to your project:
+#### Box Office Mojo Movie Gross Data Frame
 
-1. Beginning
-    * Overview
-    * Business Understanding
-2. Middle
-    * Data Understanding
-    * Data Analysis
-    * Statistical Inference
-3. End
-    * Recommendations
-    * Next Steps
-    * Thank You
-       * This slide should include a prompt for questions as well as your contact information
+This data frame is missing a lot of foreign gross values which could potentially be filled in by taking the difference from the budgets df ww_gross - domestic_gross, otherwise we will throw out those values because we can not estimate them.
 
-You will give a live presentation of your slides and submit them in PDF format on Canvas. The slides should also be present in the GitHub repository you submit with a file name of `presentation.pdf`.
+We most likely will not use this data frame because the movie_budgets dataframe offer the same information and a bit more that is helpful to our analysis
 
-The graded elements of the presentation are:
+## Data Visualizations
 
-* Presentation Content
-* Slide Style
-* Presentation Delivery and Answers to Questions
+[INSERT HERE]
 
-See the [Grading](#grading) section for further explanation of these elements.
+# Statistical Communication
 
-For further reading on creating professional presentations, check out:
+The question we wanted to answer was whether producing a big budget film (production budget > \\$100,000,000) or small budget film (production budget < \\$5,000,000) would be better for Computing Vision. Being a new company with little experience in the Movie Indstury and no name sake, going all in on a large budget film is risky. 
 
-* [Presentation Content](https://github.com/learn-co-curriculum/dsc-project-presentation-content)
-* [Slide Style](https://github.com/learn-co-curriculum/dsc-project-slide-design)
+We looked at what percentage of small, medium, and large budget films produced a profit and to our surprise small budget films drastcially out perform big budget films. In fact, 47.90% of small budget films were profitable, and only 6.86% of big budget films were profitable. This led us to believe that producing small budget films would be better for Computing Vision.
 
-### Jupyter Notebook
+To test this, we calculated what the average Gross Margin ratio was for each of the budget sizes by creating a categorical variable to indicate the budget category. After some analysis we ran a independent two sample t test because we did not have all movies created in this test however we wanted to see whether their average gross margins were significantly different. 
 
-The Jupyter Notebook is a notebook that uses Python and Markdown to present your analysis to a data science audience.
+The results of this are as follows:
+    
+    $H_0:$ There is no difference between small and big budget mean worldwide gross profit margin 
 
-* ***Python and Markdown*** means that you need to construct an integrated `.ipynb` file with Markdown (headings, paragraphs, links, lists, etc.) and Python code to create a well-organized, skim-able document.
-  * The notebook kernel should be restarted and all cells run before submission, to ensure that all code is runnable in order.
-  * Markdown should be used to frame the project with a clear introduction and conclusion, as well as introducing each of the required elements.
-* ***Data science audience*** means that you can assume basic data science proficiency in the person reading your notebook. This differs from the non-technical presentation.
+    $H_A:$ The mean Worldwide gross profit margins are different for small and big budget film
 
-Along with the presentation, the notebook also describes the project ***goals, data, methods, and results***. It must include at least ***three visualizations*** which correspond to ***three business recommendations***.
+We want to use statistical analysis rather than simply a graph because we want to conclude that the mean of both of these samples is the same. We did not analyze every movie to exist and as such we wanted to ensure that our information and the claims that we are making have a statistical backing.
 
-You will submit the notebook in PDF format on Canvas as well as in `.ipynb` format in your GitHub repository.
+This problem is suited for this analysis because we are observing two seperate groups - the small budget movies and the big budget movies. We are curious if there is a statistically significant difference between their average gross profit margins because we want to be able to make a recommendation to Computing Vision of how much to invest. As we saw above, gross margin correlates weak to moderately with total profit and thus we want to know if the gross margins are different for these two groups.
 
-The graded elements for the Jupyter Notebook are:
+Limitations: 
+* we are not sure what the sample was all we know is that it came from the file provided
+* Only considered films with worldwide gross greater than zero (mathematical purposes)
+* removed outliers who were 1.5 times the IQR removed from the data. 
+* scale of these are drastically different: production budget has a moderate to strong positive correlation with total profit
+    * This means regardless a big budget film will net more profit if proftitable
+    
+Results:
+* p-value = 0.32316 > 0.5, > 0.10 thus at both a 90% and 95% confidence level we fail to reject the null hypothesis
+* This indicates that we do not have evidence to support the claim that there is a significant difference between the two averages
+
+Recommendation and Findings: With the information provided, the means from the two samples are not significantly different, meaning based on the given samples the mean gross profit margin for small budget films is comparable to that of a big budget film.  However, for a company such as Computing Vision making their first break into the film industry, beginning with a low budget film that has the potential to turn a high percentage of gross revenue into profits can be a great start. They can then look to scale up and produce bigger budget films as they become a better known name in the industry and get their legs under them in production.
+
+
+# Conclusion
+
+### Summary
+
+Throughout our analysis we found many interesting items related to what makes a movie successful. For a company like Computing Vision, we believe the most relevant items will be financial success in the market as opposed to fan metrics such as average ratings. Because of this, we focused on Gross Margin and Total Profit to be indicators for our decisions. Through a series of data preparation, analysis, and visualization we were able to procure a set of three relevant recommendations for the firm to follow. 
+
+### Relevant Findings
+1. Produce a Small Budget Film
+    * Small Budget Films have an average Gross Margin of 49.86% and Big Budgets is 53.13
+    * These results are not significantly different based on our testing and as such we would recommend Small Budget
+    * Small budget films have a higher probability of profit compared to big budget
+        * Thus a better chance to see return on money spent producing a film
+2. Create a movie in the {blank} genre
+    * 
+3. Release your movie in May
+    * We see that the summer months, which coincides to when school releases has a spike in average gross margin
+        * To be most successful financially, May allows you to capture those months of high revnue
+    * There is a dip in Aug, Sept, and Oct however dring the Holidays (Nov and Dec) there is another spike 
+        * When releasing in May, you will capture both the summer and holiday high gross margins
 
-* Business Understanding
-* Data Understanding
-* Data Preparation
-* Data Analysis
-* Visualization
-* Statistical Communication
-* Code Quality
-
-See the [Grading](#grading) section for further explanation of these elements.
-
-### GitHub Repository
-
-The GitHub repository is the cloud-hosted directory containing all of your project files as well as their version history.
-
-A professional GitHub repository has:
-
-1. `README.md`
-    * A file called `README.md` at the root of the repository directory, written in Markdown; this is what is rendered when someone visits the link to your repository in the browser
-    * This file contains these sections:
-       * Overview
-       * Business Understanding
-          * Include stakeholder and key business questions
-       * Data Understanding and Analysis
-          * Source of data
-          * Description of data
-          * Three visualizations (the same visualizations presented in the slides and notebook)
-       * Statistical Communication
-          * Results of statistical inference
-          * Interpretation of these results in the context of the problem
-       * Conclusion
-          * Summary of conclusions including three relevant findings
-2. Commit history
-   * Progression of updates throughout the project time period, not just immediately before the deadline
-   * Clear commit messages
-   * Commits from all team members
-3. Organization
-   * Clear folder structure
-   * Clear names of files and folders
-   * Easily-located notebook and presentation linked in the README
-4. Notebook(s)
-   * Clearly-indicated final notebook that runs without errors
-   * Exploratory/working notebooks (can contain errors, redundant code, etc.) from all team members
-5. `.gitignore`
-   * A file called `.gitignore` at the root of the repository directory instructs Git to ignore large, unnecessary, or private files
-     * Because it starts with a `.`, you will need to type `ls -a` in the terminal in order to see that it is there
-   * GitHub maintains a [Python .gitignore](https://github.com/github/gitignore/blob/master/Python.gitignore) that may be a useful starting point for your version of this file
-   * To tell Git to ignore more files, just add a new line to `.gitignore` for each new file name
-     * If you are running into an error message because you forgot to add something to `.gitignore` and it is too large to be pushed to GitHub [this blog post](https://medium.com/analytics-vidhya/tutorial-removing-large-files-from-git-78dbf4cf83a?sk=c3763d466c7f2528008c3777192dfb95) should help you address this
-
-You will submit a link to the GitHub repository on Canvas.
-
-See the [Grading](#grading) section for further explanation of how the GitHub repository will be graded.
-
-For further reading on creating professional notebooks and `README`s, check out [this reading](https://github.com/learn-co-curriculum/dsc-repo-readability-v2-2) from Flatiron School's Consumer program.
-
-## Grading
-
-***To pass this project, you must pass each project rubric objective.*** The project rubric objectives for Phase 1 are:
-
-1. Attention to Detail
-2. Data Communication
-3. Authoring Jupyter Notebooks
-4. Data Manipulation and Analysis with `pandas`
-5. Statistical Communication
-
-### Attention to Detail
-
-Attention to detail means that you accomplish tasks thoroughly and accurately. You need to understand what is being asked of you, and double-check that your work fulfills all of the requirements.
-
-
-The *Deloitte AI Academy - Semester 1 Capstone Checklist* is in Canvas. The elements highlighted in yellow are the elements you need to complete in order to pass this objective. We recommend that you make your own copy of this document, so that you can check off each element as you complete it. The checklist also contains more specific, detailed guidance about the deliverables described above.
-
-Below are the definitions of each rubric level for this objective. This information is also summarized in the rubric, which is attached to the project submission assignment.
-
-#### Exceeds Objective
-70% or more of the project checklist items are complete
-
-#### Meets Objective (Passing Bar)
-60% of the project checklist items are complete
-
-#### Approaching Objective
-50% of the project checklist items are complete
-
-#### Does Not Meet Objective
-40% or fewer of the project checklist items are complete
-
-### Data Communication
-
-Communication is another key "soft skill". For this project, you will be required to address both Data Communication and Statistical Communication. We define Data Communication as:
-
-> Communicating basic data analysis results to diverse audiences via writing and live presentation
-
-To further define some of these terms:
-
-* By "basic data analysis" we mean that you are filtering, sorting, grouping, and/or aggregating the data in order to answer business questions. Here, descriptive statistics about the samples of data such as measures of central tendency are encouraged.
-* By "results" we mean your ***three visualizations*** that provide background to your recommendations.
-* By "diverse audiences" we mean that your presentation and notebook are appropriately addressing a business and data science audience, respectively.
-
-Below are the definitions of each rubric level for this objective. This information is also summarized in the rubric, which is attached to the project submission assignment.
-
-#### Exceeds Objective
-Creates and describes appropriate visualizations for given business questions, where each visualization fulfills all elements of the checklist
-
-> This "checklist" refers to the Data Visualization checklist within the larger Semester 1 Capstone Checklist
-
-#### Meets Objective (Passing Bar)
-Creates and describes appropriate visualizations for given business questions
-
-> This objective can be met even if all checklist elements are not fulfilled. For example, if there is some illegible text in one of your visualizations, you can still meet this objective
-
-#### Approaching Objective
-Creates visualizations that are not related to the business questions, or uses an inappropriate type of visualization
-
-> Even if you create very compelling visualizations, you cannot pass this objective if the visualizations are not related to the business questions
-
-> An example of an inappropriate type of visualization would be using a line graph to show the correlation between two independent variables, when a scatter plot would be more appropriate
-
-#### Does Not Meet Objective
-Does not submit the required number of visualizations
-
-### Authoring Jupyter Notebooks
-
-Jupyter Notebooks allow for reproducible, skim-able code documents for a data science audience. The key feature that distinguishes *authoring Jupyter Notebooks* from simply *writing Python code* is the fact that Markdown cells are integrated into the notebook along with the Python cells in a notebook. You have seen examples of this throughout the curriculum, but now it's time for you to practice this yourself!
-
-Below are the definitions of each rubric level for this objective. This information is also summarized in the rubric, which is attached to the project submission assignment.
-
-#### Exceeds Objective
-Uses Markdown and code comments to create a well-organized, skim-able document that follows all best practices
-
-> Refer to the [repository readability reading](https://github.com/learn-co-curriculum/dsc-repo-readability-v2-2) from Flatiron School's Consumer program for more tips on best practices
-
-#### Meets Objective (Passing Bar)
-Uses some Markdown to create an organized notebook, with an introduction at the top and a conclusion at the bottom
-
-#### Approaching Objective
-Uses Markdown cells to organize, but either uses only headers and does not provide any explanations or justifications, or uses only plaintext without any headers to segment out sections of the notebook
-
-> Headers in Markdown are delineated with one or more `#`s at the start of the line. You should have a mixture of headers and plaintext (text where the line does not start with `#`)
-
-#### Does Not Meet Objective
-Does not submit a notebook, or does not use Markdown cells at all to organize the notebook
-
-### Data Manipulation and Analysis with `pandas`
-
-`pandas` is a very popular data manipulation library, with over 2 million downloads on Anaconda (`conda install pandas`) and over 19 million downloads on PyPI (`pip install pandas`).
-
-Unlike in base Python, where the Zen of Python says "There should be one-- and preferably only one --obvious way to do it", there is often more than one valid way to do something in `pandas`. However there are still more efficient and less efficient ways to use it. Specifically, the best `pandas` code is *performant* and *idiomatic*.
-
-Performant `pandas` code utilizes methods and broadcasting rather than user-defined functions or `for` loops. For example, if you need to strip whitespace from a column containing string data, the best approach would be to use the [`pandas.Series.str.strip` method](https://pandas.pydata.org/docs/reference/api/pandas.Series.str.strip.html) rather than writing your own function or writing a loop. Or if you want to multiply everything in a column by 100, the best approach would be to use broadcasting (e.g. `df["column_name"] * 100`) instead of a function or loop. You can still write your own functions if needed, but only after checking that there isn't a built-in way to do it.
-
-Idiomatic `pandas` code has variable names that are meaningful words or abbreviations in English, that are related to the purpose of the variables. You can still use `df` as the name of your DataFrame if there is only one main DataFrame you are working with, but as soon as you are merging multiple DataFrames or taking a subset of a DataFrame, you should use meaningful names. For example, `df2` would not be an idiomatic name, but `movies_and_reviews` could be.
-
-We also recommend that you rename all DataFrame columns so that their meanings are more understandable, although it is fine to have acronyms. For example, `"col1"` would not be an idiomatic name, but `"USD"` could be.
-
-Below are the definitions of each rubric level for this objective. This information is also summarized in the rubric, which is attached to the project submission assignment.
-
-#### Exceeds Objective
-Uses `pandas` to prepare data and answer business questions in an idiomatic, performant way
-
-#### Meets Objective (Passing Bar)
-Successfully uses `pandas` to prepare data in order to answer business questions
-
-> This includes projects that _occasionally_ use base Python when `pandas` methods would be more appropriate (such as using `enumerate()` on a DataFrame), or occasionally performs operations that do not appear to have any relevance to the business questions
-
-#### Approaching Objective
-Uses `pandas` to prepare data, but makes significant errors
-
-> Examples of significant errors include: the result presented does not actually answer the stated question, the code produces errors, the code _consistently_ uses base Python when `pandas` methods would be more appropriate, or the submitted notebook contains significant quantities of code that is unrelated to the presented analysis (such as copy/pasted code from the curriculum or StackOverflow)
-
-#### Does Not Meet Objective
-Unable to prepare data using `pandas`
-
-> This includes projects that successfully answer the business questions, but do not use `pandas` (e.g. use only base Python, or use some other tool like R, Tableau, or Excel)
-
-### Statistical Communication
-
-Recall that communication is one of the key data science "soft skills". In addition to Data Communication, we are also focused on Statistical Communication. We define Statistical Communication as:
-
-> Communicating **results of statistical analyses** to diverse audiences via writing and live presentation
-
-High-quality Statistical Communication includes rationale, results, limitations, and recommendations:
-
-* **Rationale:** Explaining why you are using statistical analyses rather than basic data analysis
-  * For example, why are you using hypothesis testing rather than just a graph?
-  * What about the problem or data is suitable for this form of analysis?
-  * For a data science audience, this includes your reasoning for the changes you applied and choices you made while building confidence intervals and/or hypothesis tests.
-* **Results:** Describing the findings of hypothesis tests and/or confidence intervals
-  * You need run at least one hypothesis test or create at least one confidence interval.
-  * For a business audience, make sure you connect any results from these statistical procedures to real-world implications. You do not need to get into the details of how hypothesis testing or confidence intervals work, but rather make sure to interpret the results of the analyses and its implications on the business problem.
-  * Your statistical analyses should pair with *at least one* of the visualizations you created under Data Communication.
-* **Limitations:** Identifying the limitations and/or uncertainty present in your analysis
-  * This could include data collection concerns, assumptions of missing data, etc.
-  * In general, this should be more in-depth for a data science audience and more surface-level for a business audience.
-* **Recommendations:** Interpreting the statistical results and limitations in the context of the business problem
-  * What should stakeholders _do_ with this information?
-
-Make sure to pair at least one visualization with a statistical analyses here. This could, for example, correspond to showing boxplots of two groups in the sample as a lead in to a two sample t-test.
-
-#### Exceeds Objective
-
-Communicates the rationale, results, limitations, and specific recommendations of statistical analyses
-
-> See above for extended explanations of these terms.
-
-#### Meets Objective (Passing Bar)
-
-Successfully communicates the results of statistical analyses without any major errors
-
-> The minimum requirement is to communicate the _results_, meaning at least one hypothesis test or confidence interval is produced and interpreted. See the Approaching Objective section for an explanation of what a "major error" means.
-
-#### Approaching Objective
-
-Communicates the results of statistical analyses with at least one major error
-
-> A major error means that some aspect of your explanation is fundamentally incorrect. For example, if a hypothesis test produced a large p-value (say, above 50%) but the hypothesis test was still rejected at the 10% significance level, that would be a major error. Another example would be if zero was found in a confidence interval looking at the range of possible values for a difference in the mean of two groups, but statistical signifance was still reported.
-
-> The easiest way to avoid making a major error is to have someone double-check your work. Reach out to peers on Slack and ask them to confirm whether your interpretation makes sense!
-
-#### Does Not Meet Objective
-
-Does not communicate the results of statistical analyses
-
-> It is not sufficient to just display the results from Python. You must explain what those numbers mean in the context of the problem.
-
-
-## Getting Started
-
-Please start by reviewing the contents of this project description. If you have any questions, please ask your instructor ASAP.
-
-Then, you will need to create a new GitHub repository by going to [github.com/new](https://github.com/new). Then, download and copy the data files from [this folder in the capstone repo](https://github.com/learn-co-curriculum/dsc-ai-academy-semester1-capstone/tree/main/zippedData) into your new repository.
-
-## Summary
-
-This project will give you a valuable opportunity to develop your data science skills using real-world data. The capstone projects are a critical part of the program because they give you a chance to bring together all the skills you've learned, apply them to realistic projects for a business stakeholder, practice communication skills, and get feedback to help you improve. You've got this!
