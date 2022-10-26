@@ -79,10 +79,15 @@ We most likely will not use this data frame because the movie_budgets dataframe 
 
 ## Data Visualizations
 
+This visual shows us the average Gross Margin by budgets size in bar chart format. This also accompanies our primary hypothesis test between the difference of these means for the small and big budgets. It is interesting to see that you can put in less money budgeting yet gain a similar margin on your revenue and costs compared to a big budget film. The important distinction is that the scale of profit is drastically different
 
 ![Mean Gross Margin by Budget Size](visuals/Mean_Gross_Margin_by_Budget_Size.png)
 
+This visual shows how the mean gross margin changes by month. it is interesting to note that in the summer months the gross margin is noticeably higher than the beginning of the year. This coincides with school releases, the weather turning better, and more activity in peoples social lives. There is a slight lull towards the end of summer and into fall which coincides with school returning and people wanting to the last weeks of summer with friends. Then there is a spike for the holiday season when the weather is not as nice, and people are spending more time with families then they will be more inclined to see a movie. 
+
 ![Mean Gross Margin by Month](visuals/Mean_Gross_Margin_by_Month.png)
+
+The family genre is noticeably the highest for domestic profit. After running some tests on the mean gross margin we decided this was not the best metric to determine genre as there were many that were not significantly different. When looking at small budget films we noted that domestically they tend to perform far better so looking at domestic profit confirms this, and for Family genre we would recommend creating this genre because it has the highest mean domestic profit.
 
 ![Mean Domestic Profit by Genres](visuals/Mean_Domestic_Profit_by_Genre.png)
 
