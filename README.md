@@ -59,7 +59,7 @@ The family genre is noticeably the highest for domestic profit. After running so
 
 # Statistical Communication
 
-The question we wanted to answer was whether producing a big budget film (production budget > \\$50,000,000) or small budget film (production budget < \\$10,000,000) would be better for Computing Vision. Being a new company with little experience in the Movie Indstury and no name sake, going all in on a large budget film is risky. 
+The question we wanted to answer was whether producing a big budget film (production budget > \$50,000,000) or small budget film (production budget < \$10,000,000) would be better for Computing Vision. Being a new company with little experience in the Movie Indstury and no name sake, going all in on a large budget film is risky. 
 
 To test this, we calculated what the average Gross Margin ratio was for each of the budget sizes by creating a categorical variable to indicate the budget category. After some analysis we ran a independent two sample t test because we did not have all movies created in this test however we wanted to see whether their average gross margins were significantly different. 
 
@@ -70,7 +70,7 @@ $H_0:$ There is no difference between small and big budget mean worldwide gross 
 $H_A:$ The mean Worldwide gross profit margins are different for small and big budget film
     
 Results:
-* p-value = 0.00456 < 0.05, < 0.10 thus at both a 90% and 95% confidence level we reject the null hypothesis
+* p-value = 0.004565 < 0.05, < 0.10 thus at both a 90% and 95% confidence level we reject the null hypothesis
 * This indicates that we have evidence to support the claim that the mean gross margin for small budget films is larger than big budget films
 
 Recommendation and Findings: With the information provided, the means from the two samples are not significantly different, meaning based on the given samples the mean gross profit margin for small budget films is comparable to that of a big budget film.  However, for a company such as Computing Vision making their first break into the film industry, beginning with a low budget film that has the potential to turn a high percentage of gross revenue into profits can be a great start. They can then look to scale up and produce bigger budget films as they become a better known name in the industry and get their legs under them in production. 
@@ -84,10 +84,9 @@ Throughout our analysis we found many interesting items related to what makes a 
 
 ### Relevant Findings
 1. Produce a Small Budget Film
-    * Small Budget Films have an average Gross Margin of 49.86% and Big Budgets is 53.13
-    * These results are not significantly different based on our testing and as such we would recommend Small Budget
-    * Small budget films have a higher probability of profit compared to big budget
-        * Thus a better chance to see return on money spent producing a film
+    * Small Budget Films have an average Gross Margin of 46.41% and Big Budgets is 40.33%
+    * These results are significantly different based on our testing and as such we would recommend Small Budget
+        * Thus a better chance to see return on money spent producing a film since average gross margin is larger
 2. Create a movie in the Family genre
     * After some analysis we came to the conclusion that a drama movie would be the best movie to produce
         * Has the highest mean Domestic Profit
