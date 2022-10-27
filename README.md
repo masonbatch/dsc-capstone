@@ -88,7 +88,7 @@ Throughout our analysis we found many interesting items related to what makes a 
     * These results are significantly different based on our testing and as such we would recommend Small Budget
         * Thus a better chance to see return on money spent producing a film since average gross margin is larger
 2. Create a movie in the Family genre
-    * After some analysis we came to the conclusion that a drama movie would be the best movie to produce
+    * After some analysis we came to the conclusion that a Family movie would be the best movie to produce
         * Has the highest mean Domestic Profit
         * Matters because Small Budgets Films perform better domestically
     * Across the board in all level of analyses Foreign, Domestic, and Total Profit, Family topped the list
