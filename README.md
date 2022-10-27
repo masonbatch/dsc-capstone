@@ -24,6 +24,7 @@ While we may not touch on all of these, they are all things that could be consid
 
 We will define success in two ways. The first being the Gross Margin and the other being Total Profit. The Gross Margin calculations are detailed below. The reason we chose to focus on profitabilty metrics instead of ratings was because this company, computing vision, is trying to break into a well established market they want to ensure that the investment they put in is having a positive return. 
 
+
 Our recommendations for this company will be based off of the Gross Margin which is portrayed as a percentage. The higher this percentage is, the more the company is retaining for every dollar that is invested in the movie and as such is seeing a higher return on their investment. This is not necessarily equivalent to a standard ratio of Gross Margin which would include Net Sales and COGS. However, considering the "Gross" columns of our data frame as a proxy for sales, and Production Budget as a proxy for COGS, it will yield similar results and actionable outcomes.
 
 $Gross Margin = \frac{Gross Revenue - Production Budget}{Gross Revenue} x 100$
@@ -38,6 +39,7 @@ The data we chose to focus most of our efforts on came from:
 * IMDB
 * The Numbers
 * TheMovieDB
+
 
 Most of our recommendations came from The Numbers, which contains the Gross Revenue and Production Budget numbers, as well as IMDB and TheMoviesDB which contained a lot of background information on the movies including ratings and genre.
 
@@ -59,7 +61,7 @@ The most important information from this dataframe will be the id which coorespo
 
 A more advanced approach would be to conduct sentiment analysis and apply weights to the most common keywords found in a review at each score level and develop a heuristic to apply a score to the missing values based on the review that they left discarding all review entries without an actual review.
 
-This data frame has a relation to the movie_info data frame since bothg come from rotten tomatoes. The id relates to the movie that each critic leaves a review for. 
+With the information given we were able to explore connections between our definition of success, Gross Margin and Total Profit, and various features of the film industry such as budget size, genres, and what month to release in. 
 
 #### The Movie DB Dataframe
 
@@ -76,6 +78,7 @@ We will be transforming this data by making the budget and gross column integers
 This data frame is missing a lot of foreign gross values which could potentially be filled in by taking the difference from the budgets df ww_gross - domestic_gross, otherwise we will throw out those values because we can not estimate them.
 
 We most likely will not use this data frame because the movie_budgets dataframe offers the same information and a bit more that is helpful to our analysis.
+
 
 ## Data Visualizations
 
@@ -94,7 +97,7 @@ The family genre is noticeably the highest for domestic profit. After running so
 
 # Statistical Communication
 
-The question we wanted to answer was whether producing a big budget film (production budget > \\$50,000,000) or small budget film (production budget < \\$10,000,000) would be better for Computing Vision. Being a new company with little experience in the Movie Indstury and no name sake, going all in on a large budget film is risky. 
+The question we wanted to answer was whether producing a big budget film (production budget > \$50,000,000) or small budget film (production budget < \$10,000,000) would be better for Computing Vision. Being a new company with little experience in the Movie Indstury and no name sake, going all in on a large budget film is risky. 
 
 To test this, we calculated what the average Gross Margin ratio was for each of the budget sizes by creating a categorical variable to indicate the budget category. After some analysis we ran a independent two sample t test because we did not have all movies created in this test however we wanted to see whether their average gross margins were significantly different. 
 
@@ -130,10 +133,9 @@ Throughout our analysis we found many interesting items related to what makes a 
 
 ### Relevant Findings
 1. Produce a Small Budget Film
-    * Small Budget Films have an average Gross Margin of 49.86% and Big Budgets is 53.13%
-    * These results are not significantly different based on our testing and as such we would recommend Small Budget
-    * Small budget films have a higher probability of profit compared to big budget
-        * Thus a better chance to see return on money spent producing a film
+    * Small Budget Films have an average Gross Margin of 46.41% and Big Budgets is 40.33%
+    * These results are significantly different based on our testing and as such we would recommend Small Budget
+        * Thus a better chance to see return on money spent producing a film since average gross margin is larger
 2. Create a movie in the Family genre
     * After some analysis we came to the conclusion that a Family movie would be the best movie to produce
         * Has the highest mean Domestic Profit
