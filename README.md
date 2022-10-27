@@ -5,7 +5,7 @@ Our group has been tasked with analyzing historical data from multiple sources r
 ### Navigating the Repo
 
 * The Visuals folder contains essential visuals that appear in the presentation or appendix
-* Our Presentation is in PDF format [Presentation PDF File](http://localhost:8888/files/Capstone%20Presentation.pdf)
+* Our Presentation is in PDF format [Presentation PDF File](./Capstone_presentation.pdf)
 
 # Business Understanding
 
