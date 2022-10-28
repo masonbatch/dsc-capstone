@@ -97,7 +97,7 @@ Throughout our analysis we found many interesting items related to what makes a 
         * Family has the largest Gross Margin by a small amount compared to the Mystery Genre
         * The results comparing Family and mystery, and Family and TV Movie were not significant 
         * Then basing our recommendation off the Domestic Profit, we would still recommend a Family movie which has the highest domestic profit
-3. Release your movie in May
+3. Release your movie in Summer months
     * We see that the summer months, which coincides to when school releases has a spike in average gross margin
         * To be most successful financially, May allows you to capture those months of high revnue
     * There is a dip in Aug, Sept, and Oct however dring the Holidays (Nov and Dec) there is another spike 
